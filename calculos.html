@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lug analysis</title>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}}); 
+    </script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./normalize.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>CARGA AXIAL - CARGAS PERMISIBLES</h1>  
+        <h2>DATOS</h2>  
+        <form>
+            <fieldset>
+                <legend>Datos de entrada</legend>
+                <div class="data-inputs">
+                    <h3>Datos de la orejeta</h3>
+                    <div class="lug">                
+                        <label for="materiales_orejeta">Material de la orejeta: </label>
+                        <select onchange="materialesplaca()" id="materiales_orejeta">
+                            <option selected value="0">Al 2024-T3 AMS 4037 / AMS QQ-A-250/4 Sheet 0.008-0.009 Thick S-Basis</option>
+                            <option value="1">Al 2024-T3 AMS 4462 / MIL-QQ-A-250/5 Clad Sheet 0.008-0.009 Thick A-Basis</option>
+                            <option value="2">Al 2027-T3511 AMS 4183 Profile,Extrusion - Area 0.750-1.500 Thick A-Basis</option>
+                            <option value="3">Al 2124-T851 AMS 4101 Plate - Area 1.000-1.500 Thick A-Basis</option>
+                            <option value="4">Al 7075-T6  AMS 4044 Plate,Bare - Area 0.250-0.499 Thick A-Basis</option>
+                            <option value="5">Al 7150-T76151 AMS 4306 Plate 1.001-1.5 Thick A-Basis</option>
+                        </select>
+                    </div>
+                    <div class="lug-datos">
+                        <div class="lug-dato">
+                            <label for="width">$W =$</label>
+                            <input id="width" placeholder="in" type="number">
+                        </div>
+                        <div class="lug-dato">
+                            <label for="a">$a =$</label>
+                            <input id="a" placeholder="in" type="number">
+                        </div>
+                        <div class="lug-dato">
+                            <label for="t1">$t_{1} =$</label>
+                            <input id="t1" placeholder="in" type="number">
+                        </div>
+                        <div class="lug-dato">
+                            <label for="t2">$t_{2} =$</label>
+                            <input id="t2" placeholder="in" type="number">
+                        </div>
+                        <div class="lug-dato">
+                            <label for="ftu">$F_{tu} =$</label>
+                            <input disabled id="ftu" placeholder="psi" type="number">
+                        </div>
+                        <div class="lug-dato">
+                            <label for="fty">$F_{ty} =$</label>
+                            <input disabled id="fty" placeholder="psi" type="number">
+                        </div>
+                        <div class="lug-dato">
+                            <label for="fcy">$F_{cy} =$</label>
+                            <input disabled id="fcy" placeholder="psi" type="number">
+                        </div>
+                    </div>
+
+                    <h3>Datos del sujetador</h3>
+                    <div class="sujetador-datos">
+                        <div class="sujetador">
+                            <label for="material_sujetador">Tipo de sujetador: </label>
+                            <select onchange="materialesujetador()" id="material_sujetador">
+                                <option selected value="0">B0205020AD5 - Al 2117-T4</option>
+                                <option value="1">B0205020AD6 - Al 2117-T4</option>
+                                <option value="2">B0205020AD7 - Al 2117-T4</option>
+                                <option value="3">B0205020AD8 - Al 2117-T4</option>
+                                <option value="4">B0205020E6  - Al 7050-T73</option>
+                                <option value="5">B0205020E7  - Al 7050-T73</option>
+                                <option value="6">B0205020E8  - Al 7050-T73</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="lug-datos">
+                        <div class="lug-dato">
+                            <label for="dbarreno">$Ø_{barreno}=$</label>
+                            <input disabled id="dbarreno" placeholder="in" type="number">
+                        </div>
+                        <div class="lug-dato">
+                            <label for="Ppermitido">$P_{cortante_{Permitido}} =$</label>
+                            <input disabled id="Ppermitido" placeholder="in" type="number">
+                        </div>
+                        <div class="lug-dato">
+                            <label for="sftu">$F_{tu} =$</label>
+                            <input disabled placeholder="psi" type="number" id="sftu">
+                        </div>
+                        <div class="lug-dato">
+                            <label for="sfty">$F_{ty} =$</label>
+                            <input disabled placeholder="psi" type="number" id="sfty">
+                        </div>
+                        <div class="lug-dato">
+                            <label for="sfcy">$F_{cy} =$</label>
+                            <input disabled placeholder="psi" type="number" id="sfcy">
+                        </div>
+                    </div>
+
+                    <h3>Requerimientos de diseño</h3>
+                    <div class="lug-datos">
+                        <div class="lug-dato">
+                            <label for="ff">Factor de ajuste $(FA) =$</label>
+                            <input id="ff" placeholder="in" type="number">
+                        </div>
+                        <div class="lug-dato">
+                            <label for="ms">$MS_{mín} =$</label>
+                            <input id="ms" placeholder="" type="number">
+                        </div>
+                        <div class="lug-dato">
+                            <label for="paplicada">$P_{aplicada} =$</label>
+                            <input id="paplicada" placeholder="lb" type="number">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+        <h2>CALCULOS</h2>  
+        <form>
+            <fieldset>
+                <legend>Datos de salida</legend>
+                <div class="data-inputs">
+                    <h3>Datos de la geometría de la orejeta</h3>
+                    <div class="lug-datos">
+                        <div class="lug-dato">
+                            <label for="ed1">$a/Ø_{barreno} =$</label>
+                            <input disabled id="ed1" placeholder="" type="number">
+                        </div>
+                        <div class="lug-dato">
+                            <label for="w_dhole">$W/Ø_{barreno} =$</label>
+                            <input disabled id="w_dhole" placeholder="" type="number">
+                        </div>
+                        <div class="lug-dato">
+                            <label for="abr">$A_{br} =$</label>
+                            <input id="abr" disabled placeholder="in²" type="number">
+                        </div>
+                        <div class="lug-dato">
+                            <label for="at">$A_{t} = (W-Ø_{barreno})t$</label>
+                            <input id="at" disabled placeholder="in²" type="number">
+                        </div>
+                    </div>
+
+                    <h3>Falla por tensión</h3>
+                    <div class="lug-datos">
+                        <div class="lug-dato">
+                            <label for="ed">$a/Ø_{barreno}=$</label>
+                            <input id="ed" disabled placeholder="" type="number">
+                        </div>
+                        <div class="lug-dato">
+                            <label for="kt">$K_{t} =$</label>
+                            <input id="kt" disabled placeholder="" type="number">
+                        </div>
+                        <div class="lug-dato">
+                            <label for="ptu">$P_{tu} = K_{t}\bullet F_{tu} \bullet (W-Ø_{barreno})\bullet t_{2}$</label>
+                            <input id="ptu" disabled placeholder="lb" type="number">
+                        </div>
+                        <div class="lug-dato">
+                            <label for="MOS">$MS = (P_{permitida}/P_{aplicada}\bullet FA)-1 $</label>
+                            <input disabled id="MOS" placeholder="" type="number">
+                        </div>
+                        <div class="lug-dato" style="text-align: center;">
+                            <label for=""></label>
+                            <label for="">$>=$</label>
+                        </div>
+                        <div class="lug-dato">
+                            <label for="resultado">$MS_{mín}$</label>
+                            <input disabled id="resultado" placeholder="" type="text">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="btn-alinear">
+                <input class="btn" onclick="calcular()" type="button" value="Calcular">
+            </div>
+        </form>
+    </div>
+    <script src="js/calculos.js"></script>
+</body>
+</html>

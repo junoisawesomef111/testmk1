@@ -1,0 +1,68 @@
+
+body {
+    background-color: rgb(255, 102, 0);
+    font-size: 62.5%;
+}
+
+
+img {
+    width: 100%;
+}
+.imagen{
+    width: 15%;
+}
+
+.header-1{
+    margin: 0;
+    margin-left: 50px;
+    font-size: 2.75rem;
+}
+
+fieldset {
+    width: 70rem;
+    margin: 0 auto;
+    border: none; 
+    font-family:"Poppins",sans-serif;   
+}
+
+.campos {
+    width: 70rem;
+    margin: 0 auto;
+    background-color: rgb(143, 209, 79);
+    padding: 1.5rem 3rem;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    font-family:"Poppins",sans-serif;
+    gap: 1.5rem;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+
+.input-text {
+    width: 100%;
+    font-size: 1.2rem;
+    border: none;
+    border-bottom: solid rgb(255, 102, 0);
+    margin-top: 5px;
+}
+
+.etiqueta {
+    font-size: 1.25rem;
+}
+
+.main {
+    width: 90rem;
+    margin: 0 auto;
+    background-color: rgb(255, 102, 0);
+    padding: 3rem 0 4rem 0;
+}
+
+.boton-margin{
+    width: 75rem;
+    margin: 1.5rem auto 0 auto;
+    text-align: right;
+}
+
+
+
